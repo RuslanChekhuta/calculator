@@ -5,9 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
+    <div class="calculator">
+        <div class="display">12345</div>
+        <div class="buttons">
+            <div class="row">
+                <button type="button" class="clear" data-calc="clear">CLEAR</button>
+                <button type="button" class="delete" data-calc="delete">DELETE</button>
+            </div>
+            <div class="row">
+                <button type="button" class="digit" data-calc="7">7</button>
+                <button type="button" class="digit" data-calc="8">8</button>
+                <button type="button" class="digit" data-calc="9">9</button>
+                <button type="button" class="operator" data-calc="/">&divide;</button>
+            </div>
+            <div class="row">
+                <button type="button" class="digit" data-calc="4">4</button>
+                <button type="button" class="digit" data-calc="5">5</button>
+                <button type="button" class="digit" data-calc="6">6</button>
+                <button type="button" class="operator" data-calc="*">&times;</button>
+            </div>
+            <div class="row">
+                <button type="button" class="digit" data-calc="1">1</button>
+                <button type="button" class="digit" data-calc="2">2</button>
+                <button type="button" class="digit" data-calc="3">3</button>
+                <button type="button" class="operator" data-calc="-">&minus;</button>
+            </div>
+            <div class="row">
+                <button type="button" class="digit" data-calc="0">0</button>
+                <button type="button" class="digit" data-calc=".">&period;</button>
+                <button type="button" class="equals" data-calc="=">&equals;</button>
+                <button type="button" class="operator" data-calc="+">&plus;</button>
+            </div>
+        </div>
+    </div>
     <script src="./script.js"></script>
 </body>
 
