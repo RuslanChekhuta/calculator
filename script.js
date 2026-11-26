@@ -1,18 +1,21 @@
 let firstNumber = "0";
 let operator = null;
 let secondNumber = null;
+let isResultDisplayed = false;
 
 const digitButtons = document.querySelectorAll(".digit");
 const display = document.querySelector(".display");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalsButton = document.querySelector(".equals");
+const clearButton = document.querySelector(".clear");
 
 function appendDigit(event) {
   const digitValue = event.target.dataset.calc;
   if (digitValue === ".") return;
   if (!operator) {
-    if (firstNumber === "0") {
+    if (firstNumber === "0" || isResultDisplayed) {
       firstNumber = "";
+      isResultDisplayed = false;
     }
     firstNumber += digitValue;
     updateDisplay(firstNumber);
@@ -30,7 +33,10 @@ function updateDisplay(currNum) {
 }
 
 function handleOperator(event) {
+  const canContinue = handleEquals();
+  if (!canContinue) return;
   operator = event.target.dataset.calc;
+  isResultDisplayed = false;
 }
 
 digitButtons.forEach((button) => {
@@ -61,7 +67,28 @@ const operate = (operation, num1, num2) => {
 };
 
 function handleEquals() {
-  if (!firstNumber || !operator || !secondNumber) return;
+  if (!firstNumber || !operator || !secondNumber) return true;
+  if (operator === "/" && Number(secondNumber) === 0) {
+    handleClear();
+    updateDisplay("Nice try!");
+    return false;
+  }
   const result = operate(operator, Number(firstNumber), Number(secondNumber));
-  updateDisplay(result);
+  const fResult = Math.round(result * 1e6) / 1e6;
+  updateDisplay(fResult);
+  firstNumber = String(result);
+  operator = null;
+  secondNumber = null;
+  isResultDisplayed = true;
+  return true;
 }
+
+function handleClear() {
+  firstNumber = "0";
+  operator = null;
+  secondNumber = null;
+  updateDisplay("0");
+  isResultDisplayed = false;
+}
+
+clearButton.addEventListener("click", handleClear);
